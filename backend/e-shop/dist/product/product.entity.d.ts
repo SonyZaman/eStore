@@ -7,6 +7,7 @@ export declare class ProductEntity {
     description: string;
     price: number;
     productType: string;
+    imageUrl: string;
     vendor: VendorEntity;
     category: CategoryEntity;
     orderItems: OrderItemEntity[];

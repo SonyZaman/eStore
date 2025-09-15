@@ -20,6 +20,7 @@ let ProductEntity = class ProductEntity {
     description;
     price;
     productType;
+    imageUrl;
     vendor;
     category;
     orderItems;
@@ -45,6 +46,10 @@ __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], ProductEntity.prototype, "productType", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], ProductEntity.prototype, "imageUrl", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => vendor_entity_1.VendorEntity, vendor => vendor.products),
     (0, typeorm_1.JoinColumn)({ name: 'vendorId' }),

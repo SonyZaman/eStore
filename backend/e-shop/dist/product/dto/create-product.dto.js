@@ -8,6 +8,7 @@ class CreateProductDto {
     productType;
     vendorId;
     categoryId;
+    imageUrl;
 }
 exports.CreateProductDto = CreateProductDto;
 //# sourceMappingURL=create-product.dto.js.map

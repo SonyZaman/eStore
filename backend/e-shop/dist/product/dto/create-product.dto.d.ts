@@ -5,4 +5,5 @@ export declare class CreateProductDto {
     productType: string;
     vendorId: number;
     categoryId: number;
+    imageUrl?: string;
 }

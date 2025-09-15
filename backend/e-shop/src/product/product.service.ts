@@ -22,6 +22,7 @@ export class ProductService {
     product.description = dto.description;
     product.price = dto.price;
     product.productType = dto.productType;
+    product.imageUrl = dto.imageUrl || ''; 
 
     // Find the Vendor entity by id
     const vendor = await this.vendorRepository.findOne({ where: { id: dto.vendorId } });

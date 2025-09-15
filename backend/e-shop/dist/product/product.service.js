@@ -34,6 +34,7 @@ let ProductService = class ProductService {
         product.description = dto.description;
         product.price = dto.price;
         product.productType = dto.productType;
+        product.imageUrl = dto.imageUrl || '';
         const vendor = await this.vendorRepository.findOne({ where: { id: dto.vendorId } });
         if (!vendor)
             throw new Error('Vendor not found');

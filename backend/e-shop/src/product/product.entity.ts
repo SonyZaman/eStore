@@ -1,3 +1,4 @@
+// product.entity.ts
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
 import { VendorEntity } from '../vendor/vendor.entity';  // Import Vendor entity
 import { CategoryEntity } from '../category/category.entity';  // Import Category entity
@@ -19,6 +20,9 @@ export class ProductEntity {
 
   @Column()
   productType: string;  // Product type (e.g., "Electronics", "Clothing")
+
+  @Column({ nullable: true })
+  imageUrl: string;  // Optional image URL for the product
 
   @ManyToOne(() => VendorEntity, vendor => vendor.products)  // Many-to-one relationship with VendorEntity
   @JoinColumn({ name: 'vendorId' })
