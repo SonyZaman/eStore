@@ -17,23 +17,59 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const order_entity_1 = require("./order.entity");
+const order_item_service_1 = require("../order-item/order-item.service");
+const customer_entity_1 = require("../customer/customer.entity");
+const product_entity_1 = require("../product/product.entity");
 let OrderService = class OrderService {
     orderRepository;
-    constructor(orderRepository) {
+    orderItemService;
+    customerRepository;
+    productRepository;
+    constructor(orderRepository, orderItemService, customerRepository, productRepository) {
         this.orderRepository = orderRepository;
+        this.orderItemService = orderItemService;
+        this.customerRepository = customerRepository;
+        this.productRepository = productRepository;
     }
-    create(createOrderDto) {
-        const order = this.orderRepository.create(createOrderDto);
-        return this.orderRepository.save(order);
+    async create(dto) {
+        const customer = await this.customerRepository.findOne({ where: { id: dto.customerId } });
+        if (!customer)
+            throw new Error('Customer not found');
+        const order = new order_entity_1.OrderEntity();
+        order.customer = customer;
+        order.status = dto.status || 'pending';
+        order.totalPrice = 0;
+        const savedOrder = await this.orderRepository.save(order);
+        let total = 0;
+        if (!Array.isArray(dto.orderItems))
+            throw new Error('dto.orderItems must be an array');
+        for (const itemDto of dto.orderItems) {
+            const product = await this.productRepository.findOne({ where: { id: itemDto.productId } });
+            if (!product)
+                throw new Error(`Product with id ${itemDto.productId} not found`);
+            const orderItem = await this.orderItemService.create({
+                orderId: savedOrder.id,
+                productId: product.id,
+                quantity: itemDto.quantity,
+            });
+            total += product.price * itemDto.quantity;
+        }
+        savedOrder.totalPrice = total;
+        return this.orderRepository.save(savedOrder);
     }
-    findAll() {
-        return this.orderRepository.find();
+    async findAll() {
+        return this.orderRepository.find({ relations: ['customer', 'orderItems'] });
     }
 };
 exports.OrderService = OrderService;
 exports.OrderService = OrderService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(order_entity_1.OrderEntity)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __param(2, (0, typeorm_1.InjectRepository)(customer_entity_1.CustomerEntity)),
+    __param(3, (0, typeorm_1.InjectRepository)(product_entity_1.ProductEntity)),
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        order_item_service_1.OrderItemService,
+        typeorm_2.Repository,
+        typeorm_2.Repository])
 ], OrderService);
 //# sourceMappingURL=order.service.js.map

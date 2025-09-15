@@ -11,12 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrderItemEntity = void 0;
 const typeorm_1 = require("typeorm");
-const product_entity_1 = require("../product/product.entity");
+const class_transformer_1 = require("class-transformer");
 const order_entity_1 = require("../order/order.entity");
+const product_entity_1 = require("../product/product.entity");
 let OrderItemEntity = class OrderItemEntity {
     id;
     quantity;
-    price;
     order;
     product;
 };
@@ -30,17 +30,12 @@ __decorate([
     __metadata("design:type", Number)
 ], OrderItemEntity.prototype, "quantity", void 0);
 __decorate([
-    (0, typeorm_1.Column)('decimal'),
-    __metadata("design:type", Number)
-], OrderItemEntity.prototype, "price", void 0);
-__decorate([
     (0, typeorm_1.ManyToOne)(() => order_entity_1.OrderEntity, order => order.orderItems),
-    (0, typeorm_1.JoinColumn)({ name: 'orderId' }),
+    (0, class_transformer_1.Exclude)(),
     __metadata("design:type", order_entity_1.OrderEntity)
 ], OrderItemEntity.prototype, "order", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => product_entity_1.ProductEntity, product => product.orderItems),
-    (0, typeorm_1.JoinColumn)({ name: 'productId' }),
+    (0, typeorm_1.ManyToOne)(() => product_entity_1.ProductEntity, { eager: true }),
     __metadata("design:type", product_entity_1.ProductEntity)
 ], OrderItemEntity.prototype, "product", void 0);
 exports.OrderItemEntity = OrderItemEntity = __decorate([

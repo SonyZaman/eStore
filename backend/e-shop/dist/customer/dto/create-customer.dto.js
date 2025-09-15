@@ -2,10 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateCustomerDto = void 0;
 class CreateCustomerDto {
-    firstName;
-    lastName;
+    name;
     email;
-    phone;
+    password;
+    contactNumber;
     address;
 }
 exports.CreateCustomerDto = CreateCustomerDto;

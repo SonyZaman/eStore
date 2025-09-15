@@ -4,5 +4,7 @@ export declare class CustomerEntity {
     name: string;
     email: string;
     password: string;
+    contactNumber: string;
+    address: string;
     orders: OrderEntity[];
 }

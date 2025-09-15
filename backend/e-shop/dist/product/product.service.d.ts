@@ -1,11 +1,13 @@
 import { Repository } from 'typeorm';
 import { ProductEntity } from './product.entity';
-import { CreateProductDto } from './dto/create-product.dto';
+import { VendorEntity } from '../vendor/vendor.entity';
+import { CategoryEntity } from '../category/category.entity';
 export declare class ProductService {
     private productRepository;
-    constructor(productRepository: Repository<ProductEntity>);
-    create(createProductDto: CreateProductDto): Promise<ProductEntity>;
+    private vendorRepository;
+    private categoryRepository;
+    constructor(productRepository: Repository<ProductEntity>, vendorRepository: Repository<VendorEntity>, categoryRepository: Repository<CategoryEntity>);
+    createProduct(dto: any): Promise<ProductEntity>;
     findAll(): Promise<ProductEntity[]>;
-    update(id: number, updateProductDto: CreateProductDto): Promise<ProductEntity>;
     remove(id: number): Promise<void>;
 }

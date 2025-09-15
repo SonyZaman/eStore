@@ -17,6 +17,8 @@ let CustomerEntity = class CustomerEntity {
     name;
     email;
     password;
+    contactNumber;
+    address;
     orders;
 };
 exports.CustomerEntity = CustomerEntity;
@@ -29,13 +31,21 @@ __decorate([
     __metadata("design:type", String)
 ], CustomerEntity.prototype, "name", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ unique: true }),
     __metadata("design:type", String)
 ], CustomerEntity.prototype, "email", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], CustomerEntity.prototype, "password", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], CustomerEntity.prototype, "contactNumber", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], CustomerEntity.prototype, "address", void 0);
 __decorate([
     (0, typeorm_1.OneToMany)(() => order_entity_1.OrderEntity, order => order.customer),
     __metadata("design:type", Array)

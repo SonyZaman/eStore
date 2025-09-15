@@ -15,8 +15,8 @@ const customer_entity_1 = require("../customer/customer.entity");
 const order_item_entity_1 = require("../order-item/order-item.entity");
 let OrderEntity = class OrderEntity {
     id;
-    totalAmount;
     status;
+    totalPrice;
     customer;
     orderItems;
 };
@@ -26,19 +26,19 @@ __decorate([
     __metadata("design:type", Number)
 ], OrderEntity.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)('decimal'),
-    __metadata("design:type", Number)
-], OrderEntity.prototype, "totalAmount", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ default: 'pending' }),
     __metadata("design:type", String)
 ], OrderEntity.prototype, "status", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => customer_entity_1.CustomerEntity, customer => customer.orders),
+    (0, typeorm_1.Column)({ type: 'decimal', default: 0 }),
+    __metadata("design:type", Number)
+], OrderEntity.prototype, "totalPrice", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => customer_entity_1.CustomerEntity, (customer) => customer.orders, { eager: true }),
     __metadata("design:type", customer_entity_1.CustomerEntity)
 ], OrderEntity.prototype, "customer", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => order_item_entity_1.OrderItemEntity, orderItem => orderItem.order),
+    (0, typeorm_1.OneToMany)(() => order_item_entity_1.OrderItemEntity, (orderItem) => orderItem.order, { cascade: true, eager: true }),
     __metadata("design:type", Array)
 ], OrderEntity.prototype, "orderItems", void 0);
 exports.OrderEntity = OrderEntity = __decorate([

@@ -1,21 +1,21 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
-import { CustomerEntity } from '../customer/customer.entity';  // Import Customer entity
-import { OrderItemEntity } from '../order-item/order-item.entity';  // Import OrderItem entity
+import { CustomerEntity } from '../customer/customer.entity';
+import { OrderItemEntity } from '../order-item/order-item.entity';
 
 @Entity('orders')
 export class OrderEntity {
   @PrimaryGeneratedColumn()
-  id: number;  // Unique identifier for the order
+  id: number;
 
-  @Column('decimal')
-  totalAmount: number;  // Total price of the order
+  @Column({ default: 'pending' })
+  status: string;
 
-  @Column()
-  status: string;  // Order status (e.g., "Pending", "Shipped", "Delivered")
+  @Column({ type: 'decimal', default: 0 })
+  totalPrice: number;
 
-  @ManyToOne(() => CustomerEntity, customer => customer.orders)  // Many orders can belong to one customer
-  customer: CustomerEntity;  // Customer who placed this order
+  @ManyToOne(() => CustomerEntity, (customer) => customer.orders, { eager: true })
+  customer: CustomerEntity;
 
-  @OneToMany(() => OrderItemEntity, orderItem => orderItem.order)  // One order can have multiple order items
-  orderItems: OrderItemEntity[];  // List of order items in this order
+  @OneToMany(() => OrderItemEntity, (orderItem) => orderItem.order, { cascade: true, eager: true })
+  orderItems: OrderItemEntity[];
 }

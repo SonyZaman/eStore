@@ -1,5 +1,6 @@
+import { CreateOrderItemDto } from '../../order-item/dto/create-order-item.dto';
 export declare class CreateOrderDto {
     customerId: number;
-    orderDate?: Date;
     status?: string;
+    orderItems: CreateOrderItemDto[];
 }

@@ -16,16 +16,16 @@ exports.OrderController = void 0;
 const common_1 = require("@nestjs/common");
 const order_service_1 = require("./order.service");
 const create_order_dto_1 = require("./dto/create-order.dto");
+const class_transformer_1 = require("class-transformer");
+const class_validator_1 = require("class-validator");
 let OrderController = class OrderController {
     orderService;
     constructor(orderService) {
         this.orderService = orderService;
     }
-    create(createOrderDto) {
-        return this.orderService.create(createOrderDto);
-    }
-    findAll() {
-        return this.orderService.findAll();
+    async create(dto) {
+        await (0, class_validator_1.validateOrReject)((0, class_transformer_1.plainToInstance)(create_order_dto_1.CreateOrderDto, dto));
+        return this.orderService.create(dto);
     }
 };
 exports.OrderController = OrderController;
@@ -34,14 +34,8 @@ __decorate([
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_order_dto_1.CreateOrderDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], OrderController.prototype, "create", null);
-__decorate([
-    (0, common_1.Get)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], OrderController.prototype, "findAll", null);
 exports.OrderController = OrderController = __decorate([
     (0, common_1.Controller)('orders'),
     __metadata("design:paramtypes", [order_service_1.OrderService])

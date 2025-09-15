@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CustomerEntity } from './customer.entity';
 import { CreateCustomerDto } from './dto/create-customer.dto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class CustomerService {
@@ -11,24 +12,25 @@ export class CustomerService {
     private customerRepository: Repository<CustomerEntity>,
   ) {}
 
-  create(createCustomerDto: CreateCustomerDto): Promise<CustomerEntity> {
-    const customer = this.customerRepository.create(createCustomerDto);
+  // Register a new customer
+  async createCustomer(dto: CreateCustomerDto): Promise<CustomerEntity> {
+    const hashedPassword = await bcrypt.hash(dto.password, 10);
+
+    const customer = this.customerRepository.create({
+      ...dto,
+      password: hashedPassword,
+    });
+
     return this.customerRepository.save(customer);
   }
 
-  findAll(): Promise<CustomerEntity[]> {
+  // Get all customers
+  async findAll(): Promise<CustomerEntity[]> {
     return this.customerRepository.find();
   }
 
-//   findOne(id: number): Promise<CustomerEntity> {
-//     return this.customerRepository.findOne(id);
+//   // Get single customer by ID
+//   async findOne(id: number): Promise<CustomerEntity> {
+//     return this.customerRepository.findOne({ where: { id } });
 //   }
-
-  update(id: number, updateCustomerDto: CreateCustomerDto): Promise<CustomerEntity> {
-    return this.customerRepository.save({ ...updateCustomerDto, id });
-  }
-
-  remove(id: number): Promise<void> {
-    return this.customerRepository.delete(id).then(() => undefined);
-  }
 }

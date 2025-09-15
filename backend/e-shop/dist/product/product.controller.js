@@ -21,17 +21,11 @@ let ProductController = class ProductController {
     constructor(productService) {
         this.productService = productService;
     }
-    create(createProductDto) {
-        return this.productService.create(createProductDto);
+    async create(dto) {
+        return this.productService.createProduct(dto);
     }
-    findAll() {
+    async findAll() {
         return this.productService.findAll();
-    }
-    update(id, updateProductDto) {
-        return this.productService.update(id, updateProductDto);
-    }
-    remove(id) {
-        return this.productService.remove(id);
     }
 };
 exports.ProductController = ProductController;
@@ -40,29 +34,14 @@ __decorate([
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_product_dto_1.CreateProductDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], ProductController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], ProductController.prototype, "findAll", null);
-__decorate([
-    (0, common_1.Put)(':id'),
-    __param(0, (0, common_1.Param)('id')),
-    __param(1, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, create_product_dto_1.CreateProductDto]),
-    __metadata("design:returntype", void 0)
-], ProductController.prototype, "update", null);
-__decorate([
-    (0, common_1.Delete)(':id'),
-    __param(0, (0, common_1.Param)('id')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", void 0)
-], ProductController.prototype, "remove", null);
 exports.ProductController = ProductController = __decorate([
     (0, common_1.Controller)('products'),
     __metadata("design:paramtypes", [product_service_1.ProductService])

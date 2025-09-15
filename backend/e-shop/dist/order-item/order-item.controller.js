@@ -15,23 +15,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrderItemController = void 0;
 const common_1 = require("@nestjs/common");
 const order_item_service_1 = require("./order-item.service");
-const create_order_item_dto_1 = require("./dto/create-order-item.dto");
 let OrderItemController = class OrderItemController {
     orderItemService;
     constructor(orderItemService) {
         this.orderItemService = orderItemService;
     }
-    create(createOrderItemDto) {
-        return this.orderItemService.create(createOrderItemDto);
+    async create(dto) {
+        return this.orderItemService.create(dto);
     }
-    findAll() {
+    async findAll() {
         return this.orderItemService.findAll();
-    }
-    update(id, updateOrderItemDto) {
-        return this.orderItemService.update(id, updateOrderItemDto);
-    }
-    remove(id) {
-        return this.orderItemService.remove(id);
     }
 };
 exports.OrderItemController = OrderItemController;
@@ -39,30 +32,15 @@ __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_order_item_dto_1.CreateOrderItemDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
 ], OrderItemController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], OrderItemController.prototype, "findAll", null);
-__decorate([
-    (0, common_1.Put)(':id'),
-    __param(0, (0, common_1.Param)('id')),
-    __param(1, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, create_order_item_dto_1.CreateOrderItemDto]),
-    __metadata("design:returntype", void 0)
-], OrderItemController.prototype, "update", null);
-__decorate([
-    (0, common_1.Delete)(':id'),
-    __param(0, (0, common_1.Param)('id')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", void 0)
-], OrderItemController.prototype, "remove", null);
 exports.OrderItemController = OrderItemController = __decorate([
     (0, common_1.Controller)('order-items'),
     __metadata("design:paramtypes", [order_item_service_1.OrderItemService])

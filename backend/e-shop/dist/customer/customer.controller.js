@@ -21,48 +21,27 @@ let CustomerController = class CustomerController {
     constructor(customerService) {
         this.customerService = customerService;
     }
-    create(createCustomerDto) {
-        return this.customerService.create(createCustomerDto);
+    async register(dto) {
+        return this.customerService.createCustomer(dto);
     }
-    findAll() {
+    async findAll() {
         return this.customerService.findAll();
-    }
-    update(id, updateCustomerDto) {
-        return this.customerService.update(id, updateCustomerDto);
-    }
-    remove(id) {
-        return this.customerService.remove(id);
     }
 };
 exports.CustomerController = CustomerController;
 __decorate([
-    (0, common_1.Post)(),
+    (0, common_1.Post)('register'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_customer_dto_1.CreateCustomerDto]),
-    __metadata("design:returntype", void 0)
-], CustomerController.prototype, "create", null);
+    __metadata("design:returntype", Promise)
+], CustomerController.prototype, "register", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], CustomerController.prototype, "findAll", null);
-__decorate([
-    (0, common_1.Put)(':id'),
-    __param(0, (0, common_1.Param)('id')),
-    __param(1, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, create_customer_dto_1.CreateCustomerDto]),
-    __metadata("design:returntype", void 0)
-], CustomerController.prototype, "update", null);
-__decorate([
-    (0, common_1.Delete)(':id'),
-    __param(0, (0, common_1.Param)('id')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", void 0)
-], CustomerController.prototype, "remove", null);
 exports.CustomerController = CustomerController = __decorate([
     (0, common_1.Controller)('customers'),
     __metadata("design:paramtypes", [customer_service_1.CustomerService])

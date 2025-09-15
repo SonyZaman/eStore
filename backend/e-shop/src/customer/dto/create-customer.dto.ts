@@ -1,7 +1,7 @@
 export class CreateCustomerDto {
-  firstName: string;
-  lastName: string;
+  name: string;
   email: string;
-  phone?: string;
+  password: string;
+  contactNumber?: string;
   address?: string;
 }

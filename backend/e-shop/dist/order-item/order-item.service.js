@@ -22,18 +22,12 @@ let OrderItemService = class OrderItemService {
     constructor(orderItemRepository) {
         this.orderItemRepository = orderItemRepository;
     }
-    create(createOrderItemDto) {
-        const orderItem = this.orderItemRepository.create(createOrderItemDto);
-        return this.orderItemRepository.save(orderItem);
+    async create(orderItem) {
+        const newItem = this.orderItemRepository.create(orderItem);
+        return this.orderItemRepository.save(newItem);
     }
-    findAll() {
+    async findAll() {
         return this.orderItemRepository.find();
-    }
-    update(id, updateOrderItemDto) {
-        return this.orderItemRepository.save({ ...updateOrderItemDto, id });
-    }
-    remove(id) {
-        return this.orderItemRepository.delete(id).then(() => undefined);
     }
 };
 exports.OrderItemService = OrderItemService;

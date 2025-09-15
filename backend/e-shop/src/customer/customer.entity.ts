@@ -1,20 +1,26 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { OrderEntity } from '../order/order.entity';  // Import Order entity
+import { OrderEntity } from '../order/order.entity';
 
 @Entity('customers')
 export class CustomerEntity {
   @PrimaryGeneratedColumn()
-  id: number;  // Unique identifier for the customer
+  id: number;
 
   @Column()
-  name: string;  // Customer's name
+  name: string;
+
+  @Column({ unique: true })
+  email: string;
 
   @Column()
-  email: string;  // Customer's email address
+  password: string;
 
-  @Column()
-  password: string;  // Customer's password
+  @Column({ nullable: true })
+  contactNumber: string;
 
-  @OneToMany(() => OrderEntity, order => order.customer)  // One customer can have many orders
-  orders: OrderEntity[];  // List of orders placed by the customer
+  @Column({ nullable: true })
+  address: string;
+
+  @OneToMany(() => OrderEntity, order => order.customer)
+  orders: OrderEntity[];
 }

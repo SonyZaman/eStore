@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { OrderItemEntity } from './order-item.entity';
-import { CreateOrderItemDto } from './dto/create-order-item.dto';
 
 @Injectable()
 export class OrderItemService {
@@ -11,24 +10,12 @@ export class OrderItemService {
     private orderItemRepository: Repository<OrderItemEntity>,
   ) {}
 
-  create(createOrderItemDto: CreateOrderItemDto): Promise<OrderItemEntity> {
-    const orderItem = this.orderItemRepository.create(createOrderItemDto);
-    return this.orderItemRepository.save(orderItem);
+  async create(orderItem: Partial<OrderItemEntity>): Promise<OrderItemEntity> {
+    const newItem = this.orderItemRepository.create(orderItem);
+    return this.orderItemRepository.save(newItem);
   }
 
-  findAll(): Promise<OrderItemEntity[]> {
+  async findAll(): Promise<OrderItemEntity[]> {
     return this.orderItemRepository.find();
-  }
-
-//   findOne(id: number): Promise<OrderItemEntity> {
-//     return this.orderItemRepository.findOne(id);
-//   }
-
-  update(id: number, updateOrderItemDto: CreateOrderItemDto): Promise<OrderItemEntity> {
-    return this.orderItemRepository.save({ ...updateOrderItemDto, id });
-  }
-
-  remove(id: number): Promise<void> {
-    return this.orderItemRepository.delete(id).then(() => undefined);
   }
 }
