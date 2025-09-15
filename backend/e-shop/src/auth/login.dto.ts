@@ -5,7 +5,7 @@ import { IsBoolean, IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-vali
 export class LoginDto {
 
   
-  id: number;
+
   @IsNotEmpty()
   @IsEmail()
   email: string;
@@ -16,16 +16,4 @@ export class LoginDto {
 }
 
 
-export class ForgotPasswordDto {
 
-  @IsNotEmpty()
-  @IsEmail()
-  email: string;
-}
-
-export class ResetPasswordDto {
- 
-  @IsNotEmpty()
-  @IsString()
-  newPassword: string;
-}

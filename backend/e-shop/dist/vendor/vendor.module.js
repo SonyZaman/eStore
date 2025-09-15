@@ -13,14 +13,17 @@ const vendor_entity_1 = require("./vendor.entity");
 const product_entity_1 = require("../product/product.entity");
 const vendor_service_1 = require("./vendor.service");
 const vendor_controller_1 = require("./vendor.controller");
+const auth_service_1 = require("../auth/auth.service");
+const jwt_1 = require("@nestjs/jwt");
 let VendorModule = class VendorModule {
 };
 exports.VendorModule = VendorModule;
 exports.VendorModule = VendorModule = __decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([vendor_entity_1.VendorEntity, product_entity_1.ProductEntity])],
-        providers: [vendor_service_1.VendorService],
+        providers: [vendor_service_1.VendorService, auth_service_1.AuthService, jwt_1.JwtService],
         controllers: [vendor_controller_1.VendorController],
+        exports: [vendor_service_1.VendorService],
     })
 ], VendorModule);
 //# sourceMappingURL=vendor.module.js.map

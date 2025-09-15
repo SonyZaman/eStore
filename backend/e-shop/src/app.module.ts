@@ -6,7 +6,8 @@ import { CategoryModule } from './category/category.module';
 import { OrderItemModule } from './order-item/order-item.module';
 import { OrderModule } from './order/order.module';
 import { CustomerModule } from './customer/customer.module';
-//import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './auth/auth.module';
+
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
@@ -33,7 +34,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     OrderModule,
     CustomerModule,
     ProductModule,
-    //AuthModule,
+    
+    AuthModule,
   ],
   controllers: [],
   providers: [],

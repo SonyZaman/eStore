@@ -6,6 +6,10 @@ import { CreateVendorDto } from './dto/create-vendor.dto';
 export class VendorController {
   constructor(private readonly vendorService: VendorService) {}
 
+
+  
+
+  //registration
   @Post()
   create(@Body() createVendorDto: CreateVendorDto) {
     return this.vendorService.create(createVendorDto);

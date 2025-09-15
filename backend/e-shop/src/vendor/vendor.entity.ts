@@ -9,8 +9,9 @@ export class VendorEntity {  // Renaming to VendorEntity
   @Column()
   name: string;  // Vendor's name
 
-  @Column()
-  email: string;  // Vendor's email address
+ 
+  @Column({ unique: true })  // Unique email
+  email: string; // Vendor's email address
 
   @Column()
   password: string;  // Vendor's password

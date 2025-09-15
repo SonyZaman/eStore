@@ -15,6 +15,7 @@ const category_module_1 = require("./category/category.module");
 const order_item_module_1 = require("./order-item/order-item.module");
 const order_module_1 = require("./order/order.module");
 const customer_module_1 = require("./customer/customer.module");
+const auth_module_1 = require("./auth/auth.module");
 const config_1 = require("@nestjs/config");
 let AppModule = class AppModule {
 };
@@ -44,6 +45,7 @@ exports.AppModule = AppModule = __decorate([
             order_module_1.OrderModule,
             customer_module_1.CustomerModule,
             product_module_1.ProductModule,
+            auth_module_1.AuthModule,
         ],
         controllers: [],
         providers: [],

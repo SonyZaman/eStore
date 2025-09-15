@@ -32,7 +32,8 @@ export default function Header() {
           <Link href="/help" className="text-white text-sm no-underline">
             HELP & SUPPORT
           </Link>
-          <Link href="/seller" className="text-white text-sm no-underline">
+          {/* Update href to seller registration page */}
+          <Link href="/vendor/register" className="text-white text-sm no-underline">
             BECOME A SELLER
           </Link>
           <Link

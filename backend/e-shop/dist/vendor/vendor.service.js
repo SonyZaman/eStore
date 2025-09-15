@@ -29,6 +29,15 @@ let VendorService = class VendorService {
     findAll() {
         return this.vendorRepository.find();
     }
+    async findByEmail(email) {
+        const vendor = await this.vendorRepository.findOne({
+            where: { email },
+        });
+        if (!vendor) {
+            throw new Error('Vendor not found');
+        }
+        return vendor;
+    }
     findOne(id) {
         return this.vendorRepository.find({ where: { id } }).then(vendors => vendors[0]);
     }
