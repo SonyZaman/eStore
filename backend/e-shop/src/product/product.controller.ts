@@ -19,6 +19,15 @@ export class ProductController {
     return this.productService.findAll();
   }
 
+    // Get products for a specific vendor
+ 
+  @Get('vendor/:vendorId')
+  async findByVendor(@Param('vendorId') vendorId: number) {
+    return this.productService.findByVendor(vendorId);  // Fetch products by vendorId
+  }
+
+  
+
   // // Get single product by ID
   // @Get(':id')
   // async findOne(@Param('id') id: number): Promise<ProductEntity> {

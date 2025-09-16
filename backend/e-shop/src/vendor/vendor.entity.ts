@@ -31,6 +31,9 @@ export class VendorEntity {  // Renaming to VendorEntity
   @Column({ nullable: true })
   address: string;  // Vendor's address
 
+  @Column({ nullable: true })
+  otp: string;  // Vendor's address
+
   @OneToMany(() => ProductEntity, product => product.vendor)  // Changed from seller to vendor
   products: ProductEntity[];  // One-to-many relation with the Product entity
 }

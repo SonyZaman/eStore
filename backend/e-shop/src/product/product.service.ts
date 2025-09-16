@@ -51,4 +51,12 @@ export class ProductService {
   remove(id: number): Promise<void> {
     return this.productRepository.delete(id).then(() => undefined);
   }
+
+    // Fetch products by vendor ID
+  async findByVendor(vendorId: number): Promise<ProductEntity[]> {
+    return this.productRepository.find({
+      where: { vendor: { id: vendorId } },  // Find products where the vendor ID matches
+      relations: ['vendor'],  // Ensure vendor relation is loaded
+    });
+  }
 }

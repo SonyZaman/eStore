@@ -20,7 +20,7 @@ let AuthService = class AuthService {
         this.vendorService = vendorService;
         this.jwtService = jwtService;
     }
-    async signIn(loginDto) {
+    async validateUser(loginDto) {
         const vendor = await this.vendorService.findByEmail(loginDto.email);
         if (!vendor) {
             throw new common_1.UnauthorizedException('Invalid credentials');
@@ -28,10 +28,18 @@ let AuthService = class AuthService {
         if (loginDto.password !== vendor.password) {
             throw new common_1.UnauthorizedException('Invalid credentials');
         }
-        const payload = { email: vendor.email, sub: vendor.id };
-        return {
-            access_token: await this.jwtService.signAsync(payload),
-        };
+        return vendor;
+    }
+    async signIn(loginDto) {
+        try {
+            const vendor = await this.validateUser(loginDto);
+            const payload = { email: vendor.email, sub: vendor.id };
+            const access_token = await this.jwtService.signAsync(payload);
+            return { access_token };
+        }
+        catch (err) {
+            throw new common_1.UnauthorizedException('Login failed');
+        }
     }
 };
 exports.AuthService = AuthService;

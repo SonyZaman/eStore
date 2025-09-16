@@ -13,12 +13,14 @@ const auth_service_1 = require("./auth.service");
 const jwt_strategy_1 = require("./jwt.strategy");
 const vendor_module_1 = require("../vendor/vendor.module");
 const auth_controller_1 = require("./auth.controller");
+const pusher_modul_1 = require("../notifications/pusher.modul");
 let AuthModule = class AuthModule {
 };
 exports.AuthModule = AuthModule;
 exports.AuthModule = AuthModule = __decorate([
     (0, common_1.Module)({
         imports: [
+            pusher_modul_1.PusherModule,
             vendor_module_1.VendorModule,
             jwt_1.JwtModule.register({
                 secret: 'your_secret_key',

@@ -6,4 +6,6 @@ export class LoginVendorDto {
 
   @IsString()
   password: string;  // Vendor's password
+
+ 
 }

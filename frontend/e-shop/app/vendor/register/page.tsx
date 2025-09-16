@@ -3,6 +3,7 @@
 import { useState } from "react";
 import axios from "axios";
 import Link from "next/link";  // Import the Link component
+import Header from '../../../components/header';  // Import the Header component
 
 export default function VendorRegister() {
   const [formData, setFormData] = useState({
@@ -49,6 +50,8 @@ export default function VendorRegister() {
   };
 
   return (
+    <>
+        <Header/>
     <div className="max-w-lg mx-auto p-5">
       <h1 className="text-2xl font-bold text-center mb-6">Vendor Registration</h1>
 
@@ -151,6 +154,8 @@ export default function VendorRegister() {
         </p>
       </div>
     </div>
+
+    </>
   );
 }
 

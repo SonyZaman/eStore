@@ -14,10 +14,11 @@ export class AuthService {
     private jwtService: JwtService
   ) {}
 
-  // Sign in to generate JWT token
-  // auth.service.ts
-   async signIn(loginDto: LoginDto): Promise<{ access_token: string }> {
-    const vendor = await this.vendorService.findByEmail(loginDto.email);  // This line expects `email` field
+
+    // Validate user by email and password
+  async validateUser(loginDto: LoginDto) {
+
+   const vendor = await this.vendorService.findByEmail(loginDto.email);  // This line expects `email` field
     if (!vendor) {
         throw new UnauthorizedException('Invalid credentials');
     }
@@ -26,11 +27,26 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials'); // password mismatch
     }
 
+    // If email and password are valid, return the vendor
+    return vendor;
+  }
 
-    const payload = { email: vendor.email, sub: vendor.id }; // Payload for the JWT token
-    return {
-        access_token: await this.jwtService.signAsync(payload), // Generate JWT token
-    };
+  
+
+  // Sign in to generate JWT token
+  // auth.service.ts
+   async signIn(loginDto: LoginDto): Promise<{ access_token: string }> {
+    
+    try {
+      const vendor = await this.validateUser(loginDto); // Await the result of validateUser
+
+      const payload = { email: vendor.email, sub: vendor.id }; // Prepare payload for JWT
+      const access_token = await this.jwtService.signAsync(payload); // Generate JWT token
+
+      return { access_token }; // Return the JWT token
+    } catch (err) {
+      throw new UnauthorizedException('Login failed'); // Handle any errors in login
+    }
 }
 
 

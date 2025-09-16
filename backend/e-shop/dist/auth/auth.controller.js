@@ -16,13 +16,30 @@ exports.AuthController = void 0;
 const common_1 = require("@nestjs/common");
 const auth_service_1 = require("./auth.service");
 const login_dto_1 = require("./login.dto");
+const pusher_service_1 = require("../notifications/pusher.service");
+const vendor_service_1 = require("../vendor/vendor.service");
+class VerifyOtpDto {
+    email;
+    otp;
+}
 let AuthController = class AuthController {
     authService;
-    constructor(authService) {
+    pusherService;
+    vendorService;
+    constructor(authService, pusherService, vendorService) {
         this.authService = authService;
+        this.pusherService = pusherService;
+        this.vendorService = vendorService;
     }
     async login(loginDto) {
+        const vendor = await this.authService.validateUser(loginDto);
+        await this.vendorService.updateOtpByEmailAndEmailPassTOMailer(vendor.email);
+        await this.pusherService.sendLoginNotification(vendor.email);
         return this.authService.signIn(loginDto);
+    }
+    async verifyOtp(verifyOtpDto) {
+        const { email, otp } = verifyOtpDto;
+        return this.vendorService.verifyOtpByEmail(email, otp);
     }
 };
 exports.AuthController = AuthController;
@@ -33,8 +50,17 @@ __decorate([
     __metadata("design:paramtypes", [login_dto_1.LoginDto]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "login", null);
+__decorate([
+    (0, common_1.Post)('verify-otp'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [VerifyOtpDto]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "verifyOtp", null);
 exports.AuthController = AuthController = __decorate([
     (0, common_1.Controller)('auth'),
-    __metadata("design:paramtypes", [auth_service_1.AuthService])
+    __metadata("design:paramtypes", [auth_service_1.AuthService,
+        pusher_service_1.PusherService,
+        vendor_service_1.VendorService])
 ], AuthController);
 //# sourceMappingURL=auth.controller.js.map

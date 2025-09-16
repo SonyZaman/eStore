@@ -5,11 +5,13 @@ import { AuthService } from './auth.service';
 import { JwtStrategy } from './jwt.strategy';
 import { VendorModule } from 'src/vendor/vendor.module'; // Import SellerModule
 import { AuthController } from './auth.controller';
+import { PusherModule } from 'src/notifications/pusher.modul';
 //import { MailModule } from 'src/mail/mailer.module';
 
 
 @Module({
   imports: [
+    PusherModule,
     VendorModule,  // Import Seller module to access seller data
     //MailModule,
     JwtModule.register({

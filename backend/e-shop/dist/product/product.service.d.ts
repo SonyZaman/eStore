@@ -10,4 +10,5 @@ export declare class ProductService {
     createProduct(dto: any): Promise<ProductEntity>;
     findAll(): Promise<ProductEntity[]>;
     remove(id: number): Promise<void>;
+    findByVendor(vendorId: number): Promise<ProductEntity[]>;
 }

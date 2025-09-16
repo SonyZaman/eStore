@@ -6,9 +6,10 @@ import { VendorService } from './vendor.service';
 import { VendorController } from './vendor.controller';
 import { AuthService } from '../auth/auth.service';  // Import AuthService
 import { JwtService } from '@nestjs/jwt'; // example for JwtService
+import { MailerModule } from 'src/mailer/mailer.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([VendorEntity, ProductEntity])],
+  imports: [TypeOrmModule.forFeature([VendorEntity, ProductEntity]),MailerModule],
   providers: [VendorService, AuthService,JwtService],
   controllers: [VendorController],
   exports: [VendorService], 

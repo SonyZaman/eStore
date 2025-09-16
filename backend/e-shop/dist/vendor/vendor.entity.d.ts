@@ -9,5 +9,6 @@ export declare class VendorEntity {
     storeDescription: string;
     contactNumber: string;
     address: string;
+    otp: string;
     products: ProductEntity[];
 }

@@ -1,11 +1,12 @@
-'use client';
+'use client';  // Ensure this is a Client Component
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation'; // <-- changed from 'next/router'
+import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import Header from '../../../components/header';  // Import the Header component
 
 const Login = () => {
-  const router = useRouter();  // Next.js App Router এর useRouter
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -28,9 +29,10 @@ const Login = () => {
         password,
       });
 
-      localStorage.setItem('access_token', response.data.access_token);
+      localStorage.setItem('access_token', response.data.access_token);  // Store JWT token
+      localStorage.setItem('vendor_email', email);  // Store email in localStorage
 
-      router.push('/vendor/dashboard'); // Redirect after login
+      router.push('/vendor/verify-otp');  // Redirect to dashboard
 
     } catch (err) {
       setError('Invalid credentials');
@@ -40,6 +42,9 @@ const Login = () => {
   };
 
   return (
+
+    <>
+    <Header/>
     <div className="flex justify-center items-center min-h-screen">
       <div className="w-full max-w-md p-8">
         <h1 className="text-2xl font-bold text-center mb-6">Vendor Login</h1>
@@ -88,6 +93,7 @@ const Login = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

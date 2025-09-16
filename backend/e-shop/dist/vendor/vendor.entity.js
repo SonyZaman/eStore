@@ -22,6 +22,7 @@ let VendorEntity = class VendorEntity {
     storeDescription;
     contactNumber;
     address;
+    otp;
     products;
 };
 exports.VendorEntity = VendorEntity;
@@ -61,6 +62,10 @@ __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
 ], VendorEntity.prototype, "address", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], VendorEntity.prototype, "otp", void 0);
 __decorate([
     (0, typeorm_1.OneToMany)(() => product_entity_1.ProductEntity, product => product.vendor),
     __metadata("design:type", Array)

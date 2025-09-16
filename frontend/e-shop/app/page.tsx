@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import ProductGrid from "../components/products/productGrid";
+import Header from '../components/header';  // Import the Header component
 
 interface Product {
   id: number;
@@ -43,9 +44,14 @@ export default function Home() {
     return <div className="text-center mt-20">No products found</div>;
 
   return (
+
+    <>
+    <Header/>
     <div className="max-w-7xl mx-auto px-5 py-10">
+      
       <h1 className="text-3xl font-bold mb-6 text-center">All Products</h1>
       <ProductGrid products={products} />
     </div>
+    </>
   );
 }

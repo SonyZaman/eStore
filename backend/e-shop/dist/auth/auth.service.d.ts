@@ -5,6 +5,7 @@ export declare class AuthService {
     private vendorService;
     private jwtService;
     constructor(vendorService: VendorService, jwtService: JwtService);
+    validateUser(loginDto: LoginDto): Promise<import("../vendor/vendor.entity").VendorEntity>;
     signIn(loginDto: LoginDto): Promise<{
         access_token: string;
     }>;

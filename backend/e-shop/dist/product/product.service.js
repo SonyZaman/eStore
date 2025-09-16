@@ -51,6 +51,12 @@ let ProductService = class ProductService {
     remove(id) {
         return this.productRepository.delete(id).then(() => undefined);
     }
+    async findByVendor(vendorId) {
+        return this.productRepository.find({
+            where: { vendor: { id: vendorId } },
+            relations: ['vendor'],
+        });
+    }
 };
 exports.ProductService = ProductService;
 exports.ProductService = ProductService = __decorate([
