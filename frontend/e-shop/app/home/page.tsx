@@ -1,18 +1,47 @@
-// app/page.tsx
-"use client";  // Mark this as a client component
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";  // Use next/navigation
+import axios from "axios";
+import ProductGrid from "../../components/products/productGrid";
+import Header from "../../components/header";
 
-export default function HomePage() {
-  const router = useRouter();
+interface Product {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  productType: string;
+  vendor: { id: number; name: string };
+  category: { id: number; name: string };
+  imageUrl?: string;
+}
 
-  // useEffect to automatically redirect after the component mounts
-  useEffect(() => {
-    router.push("/home");  // Redirect to the home page
-  }, [router]);
 
-  return null; // No content, just a redirect
+export default async function Home() {
+  let products: Product[] = [];
+  let error: string | undefined;
+
+  try {
+    const response = await axios.get<Product[]>(
+      "http://localhost:3000/products"
+    );
+    products = response.data;
+  } catch (err) {
+    console.error("Failed to fetch products:", err);
+    error = "Failed to load products";
+  }
+
+  if (error) return <div className="text-center mt-20">Error: {error}</div>;
+  if (products.length === 0)
+    return <div className="text-center mt-20">No products found</div>;
+
+  return (
+    <>
+      <Header />
+      <div className="max-w-7xl mx-auto px-5 py-10">
+        <h1 className="text-3xl font-bold mb-6 text-center">All Products</h1>
+        <ProductGrid products={products} />
+      </div>
+    </>
+  );
 }
 
 //csr

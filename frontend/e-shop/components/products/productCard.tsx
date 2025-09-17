@@ -1,5 +1,5 @@
 // components/productCard.tsx
-"use client";
+
 
 interface ProductCardProps {
   id: number;
@@ -25,7 +25,7 @@ export default function ProductCard({
   return (
     <div className="border rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition">
       <img
-        src={imageUrl || "/images/picture.jpg"}  // Fallback image if no image URL is provided
+        src={imageUrl || "/images/picture1.jpg"}  // Fallback image if no image URL is provided
         alt={title}
         className="w-full h-48 object-cover"
       />

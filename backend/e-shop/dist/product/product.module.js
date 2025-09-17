@@ -14,13 +14,14 @@ const vendor_entity_1 = require("../vendor/vendor.entity");
 const category_entity_1 = require("../category/category.entity");
 const product_service_1 = require("./product.service");
 const product_controller_1 = require("./product.controller");
+const pusher_service_1 = require("../notifications/pusher.service");
 let ProductModule = class ProductModule {
 };
 exports.ProductModule = ProductModule;
 exports.ProductModule = ProductModule = __decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([product_entity_1.ProductEntity, vendor_entity_1.VendorEntity, category_entity_1.CategoryEntity])],
-        providers: [product_service_1.ProductService],
+        providers: [product_service_1.ProductService, pusher_service_1.PusherService],
         controllers: [product_controller_1.ProductController],
     })
 ], ProductModule);

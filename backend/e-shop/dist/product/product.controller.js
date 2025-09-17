@@ -27,6 +27,16 @@ let ProductController = class ProductController {
     async findAll() {
         return this.productService.findAll();
     }
+    async updateProductById(id, updateProductDto) {
+        return this.productService.updateProductById(id, updateProductDto);
+    }
+    async remove(id) {
+        return this.productService.remove(id);
+    }
+    async getProduct(id) {
+        const productId = parseInt(id);
+        return await this.productService.getProductById(productId);
+    }
     async findByVendor(vendorId) {
         return this.productService.findByVendor(vendorId);
     }
@@ -45,6 +55,28 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], ProductController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Put)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, create_product_dto_1.CreateProductDto]),
+    __metadata("design:returntype", Promise)
+], ProductController.prototype, "updateProductById", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], ProductController.prototype, "remove", null);
+__decorate([
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], ProductController.prototype, "getProduct", null);
 __decorate([
     (0, common_1.Get)('vendor/:vendorId'),
     __param(0, (0, common_1.Param)('vendorId')),

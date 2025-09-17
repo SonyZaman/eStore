@@ -1,5 +1,5 @@
 // components/ProductGrid.tsx
-"use client";
+
 
 import ProductCard from "./productCard";
 

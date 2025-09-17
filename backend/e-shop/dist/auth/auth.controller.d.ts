@@ -1,6 +1,5 @@
 import { AuthService } from './auth.service';
 import { LoginDto } from './login.dto';
-import { PusherService } from '../notifications/pusher.service';
 import { VendorService } from '../vendor/vendor.service';
 declare class VerifyOtpDto {
     email: string;
@@ -8,9 +7,8 @@ declare class VerifyOtpDto {
 }
 export declare class AuthController {
     private authService;
-    private readonly pusherService;
     private readonly vendorService;
-    constructor(authService: AuthService, pusherService: PusherService, vendorService: VendorService);
+    constructor(authService: AuthService, vendorService: VendorService);
     login(loginDto: LoginDto): Promise<{
         access_token: string;
     }>;

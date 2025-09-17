@@ -6,5 +6,8 @@ export declare class ProductController {
     constructor(productService: ProductService);
     create(dto: CreateProductDto): Promise<ProductEntity>;
     findAll(): Promise<ProductEntity[]>;
+    updateProductById(id: number, updateProductDto: CreateProductDto): Promise<ProductEntity>;
+    remove(id: number): Promise<void>;
+    getProduct(id: string): Promise<ProductEntity>;
     findByVendor(vendorId: number): Promise<ProductEntity[]>;
 }

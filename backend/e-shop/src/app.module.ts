@@ -9,6 +9,7 @@ import { CustomerModule } from './customer/customer.module';
 import { AuthModule } from './auth/auth.module';
 
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { PusherModule } from './notifications/pusher.modul';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     OrderModule,
     CustomerModule,
     ProductModule,
+    PusherModule,
     
     AuthModule,
   ],

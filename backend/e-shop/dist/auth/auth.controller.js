@@ -16,7 +16,6 @@ exports.AuthController = void 0;
 const common_1 = require("@nestjs/common");
 const auth_service_1 = require("./auth.service");
 const login_dto_1 = require("./login.dto");
-const pusher_service_1 = require("../notifications/pusher.service");
 const vendor_service_1 = require("../vendor/vendor.service");
 class VerifyOtpDto {
     email;
@@ -24,17 +23,14 @@ class VerifyOtpDto {
 }
 let AuthController = class AuthController {
     authService;
-    pusherService;
     vendorService;
-    constructor(authService, pusherService, vendorService) {
+    constructor(authService, vendorService) {
         this.authService = authService;
-        this.pusherService = pusherService;
         this.vendorService = vendorService;
     }
     async login(loginDto) {
         const vendor = await this.authService.validateUser(loginDto);
         await this.vendorService.updateOtpByEmailAndEmailPassTOMailer(vendor.email);
-        await this.pusherService.sendLoginNotification(vendor.email);
         return this.authService.signIn(loginDto);
     }
     async verifyOtp(verifyOtpDto) {
@@ -60,7 +56,6 @@ __decorate([
 exports.AuthController = AuthController = __decorate([
     (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService,
-        pusher_service_1.PusherService,
         vendor_service_1.VendorService])
 ], AuthController);
 //# sourceMappingURL=auth.controller.js.map

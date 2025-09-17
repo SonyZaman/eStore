@@ -5,7 +5,7 @@ import Pusher from 'pusher';
 export class PusherService {
   private pusher: Pusher;
 
-  constructor() {
+    constructor() {
     this.pusher = new Pusher({
       appId: "2051259",        // Your Pusher app ID
       key: "165ff3ab0d24b6a4f545",             // Your Pusher key
@@ -16,12 +16,12 @@ export class PusherService {
   }
 
   // Method to send notifications to Pusher channel
-  async sendLoginNotification(email: string) {
+  async sendProductNotification(event: string, message: string, product: any) {
     try {
-            console.log('Triggering login notification for:', email); // Add a log here
-      await this.pusher.trigger('vendor-channel', 'login-event', {
-        message: `${email} just logged in`,
-        email,
+      console.log('Triggering Pusher event:', event, 'for product:', product); // Log for debugging
+      await this.pusher.trigger('vendor-channel', event, {
+        message,
+        product,
       });
     } catch (error) {
       console.error('Error sending Pusher event:', error);

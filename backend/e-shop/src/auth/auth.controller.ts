@@ -2,7 +2,6 @@
 import { Body, Controller, Param, Post, UnauthorizedException, UsePipes, ValidationPipe } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto } from './login.dto'; // DTO for login
-import { PusherService } from '../notifications/pusher.service';  // Import PusherService
 import { VendorService } from '../vendor/vendor.service';
 
 class VerifyOtpDto {
@@ -13,7 +12,6 @@ class VerifyOtpDto {
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService,
-    private readonly pusherService: PusherService, // Inject PusherService
     private readonly vendorService: VendorService
   ) {}
 
@@ -26,7 +24,7 @@ export class AuthController {
     await this.vendorService.updateOtpByEmailAndEmailPassTOMailer(vendor.email);
 
 
-    await this.pusherService.sendLoginNotification(vendor.email);
+    //await this.pusherService.sendLoginNotification(vendor.email);
     return this.authService.signIn(loginDto); // Passing loginDto to AuthService
   }
 

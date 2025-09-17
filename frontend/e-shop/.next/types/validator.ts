@@ -60,6 +60,12 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   handler satisfies AppPageConfig<"/auth/verifyotp">
 }
 
+// Validate ../../app/home/page.tsx
+{
+  const handler = {} as typeof import("../../app/home/page.js")
+  handler satisfies AppPageConfig<"/home">
+}
+
 // Validate ../../app/page.tsx
 {
   const handler = {} as typeof import("../../app/page.js")
@@ -78,6 +84,42 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   handler satisfies AppPageConfig<"/profile">
 }
 
+// Validate ../../app/vendor/dashboard/[id]/page.tsx
+{
+  const handler = {} as typeof import("../../app/vendor/dashboard/[id]/page.js")
+  handler satisfies AppPageConfig<"/vendor/dashboard/[id]">
+}
+
+// Validate ../../app/vendor/dashboard/components/barchart/page.tsx
+{
+  const handler = {} as typeof import("../../app/vendor/dashboard/components/barchart/page.js")
+  handler satisfies AppPageConfig<"/vendor/dashboard/components/barchart">
+}
+
+// Validate ../../app/vendor/dashboard/components/piechart/page.tsx
+{
+  const handler = {} as typeof import("../../app/vendor/dashboard/components/piechart/page.js")
+  handler satisfies AppPageConfig<"/vendor/dashboard/components/piechart">
+}
+
+// Validate ../../app/vendor/dashboard/components/productForm/page.tsx
+{
+  const handler = {} as typeof import("../../app/vendor/dashboard/components/productForm/page.js")
+  handler satisfies AppPageConfig<"/vendor/dashboard/components/productForm">
+}
+
+// Validate ../../app/vendor/dashboard/components/productList/page.tsx
+{
+  const handler = {} as typeof import("../../app/vendor/dashboard/components/productList/page.js")
+  handler satisfies AppPageConfig<"/vendor/dashboard/components/productList">
+}
+
+// Validate ../../app/vendor/dashboard/components/vendorProfile/page.tsx
+{
+  const handler = {} as typeof import("../../app/vendor/dashboard/components/vendorProfile/page.js")
+  handler satisfies AppPageConfig<"/vendor/dashboard/components/vendorProfile">
+}
+
 // Validate ../../app/vendor/dashboard/page.tsx
 {
   const handler = {} as typeof import("../../app/vendor/dashboard/page.js")
@@ -88,6 +130,12 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
 {
   const handler = {} as typeof import("../../app/vendor/login/page.js")
   handler satisfies AppPageConfig<"/vendor/login">
+}
+
+// Validate ../../app/vendor/notification/page.tsx
+{
+  const handler = {} as typeof import("../../app/vendor/notification/page.js")
+  handler satisfies AppPageConfig<"/vendor/notification">
 }
 
 // Validate ../../app/vendor/register/page.tsx

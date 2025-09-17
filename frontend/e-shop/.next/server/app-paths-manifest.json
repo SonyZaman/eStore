@@ -1,10 +1,6 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/auth/login/page": "app/auth/login/page.js",
   "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/page": "app/page.js",
+  "/vendor/dashboard/[id]/page": "app/vendor/dashboard/[id]/page.js",
   "/vendor/dashboard/page": "app/vendor/dashboard/page.js",
-  "/vendor/login/page": "app/vendor/login/page.js",
-  "/vendor/register/page": "app/vendor/register/page.js",
   "/vendor/verify-otp/page": "app/vendor/verify-otp/page.js"
 }

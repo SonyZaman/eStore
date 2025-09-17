@@ -10,7 +10,7 @@ import { MailerModule as NestMailerModule } from '@nestjs-modules/mailer';
         port: 465,
         secure: true,
         auth: {
-            user: process.env.GMAIL_USER,  // Use your Gmail address
+        user: process.env.GMAIL_USER,  // Use your Gmail address
         pass: process.env.GMAIL_APP_PASSWORD,  // Use your Gmail App Password
         },
       },
